@@ -1,0 +1,30 @@
+<ion-view view-title="Register">
+    <ion-content class="padding">
+        <!--<form name="registerForm" ng-submit="signupForm(registerForm)" novalidate>-->
+        <!--   <label class="item item-input" ng-class="{ 'has-errors' : registerForm.email.$invalid && registerForm.$submitted}"> -->
+                  
+        <!--       </label>-->
+        <!--</form>-->
+        <form name="registerForm" ng-submit="signupForm(registerForm)" novalidate>
+            <label class="item item input">
+                <input name="firstName" type="text" placeholder="First Name" required ng-model="user.firstName">
+            </label> 
+            <label class="item item input">
+                <input name="lastName" type="text" placeholder="Last Name" required ng-model="user.lastName">
+            </label>
+            <label class="item item input">
+                <input name="email" type="text" placeholder="Email" required ng-model="user.email">
+            </label>
+            <label class="item item input">
+                <input name="organization" type="text" placeholder="Organization" ng-model="user.organization">
+            </label>
+            <label class="item item input">
+                <input name="password" type="password" placeholder="Password" required ng-model="user.password">
+            </label>
+            
+        <div class="padding">
+            <button type="submit" class="button button-block button-calm"> Submit </button>
+        </div>
+        </form>
+    </ion-content>
+</ion-view>
