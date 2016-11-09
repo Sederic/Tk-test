@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
-    .controller('QuestionsCtrl', ['$scope', '$stateParams', 'testInfo', 'TKAnswersService', '$state', '$ionicHistory', "$window", 
-        function($scope, $stateParams, testInfo, TKAnswersService, $state, $ionicHistory, $window) {
+    .controller('QuestionsCtrl', ['$scope', '$stateParams', 'testInfo', 'TKAnswersService', '$state', '$ionicHistory', "$window","TKResultsButtonService",
+        function($scope, $stateParams, testInfo, TKAnswersService, $state, $ionicHistory, $window, TKResultsButtonService ) {
             $scope.qNumber = $stateParams.questionID;
             testInfo.forEach(function(infoDict) {
                 if (infoDict.Answer_ID === "A")
@@ -28,7 +28,7 @@ angular.module('starter.controllers')
                 var answersDict = angular.copy(TKAnswersService.getAnswers());
                 var date = new Date();
                 answersDict["createDate"] = date.toUTCString();
-                TKAnswersService.saveTest(answersDict,$window.localStorage.token);
+                TKResultsButtonService.setShouldShowMenuButton(true);
                 $ionicHistory.nextViewOptions({
                     historyRoot: true
                 });

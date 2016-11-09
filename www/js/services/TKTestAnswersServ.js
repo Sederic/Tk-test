@@ -1,5 +1,5 @@
 angular.module('TKTestAnswers', [])
-    .service('TKAnswersService', ['$window', 'TestResultsRest', function($window, TestResultsRest) {
+    .service('TKAnswersService', ['$window', 'TestResultsRest', '$http', function($window, TestResultsRest, $http) {
         var service = this;
         var answerCategories = {
             "competing": 0,
@@ -8,7 +8,7 @@ angular.module('TKTestAnswers', [])
             "avoiding": 0,
             "accommodating": 0
         };
-        
+
         var categoriesStack = [];
 
         service.getAnswers = function() {
@@ -34,9 +34,20 @@ angular.module('TKTestAnswers', [])
 
         service.saveTest = function(test, token) {
             test.userID = $window.localStorage.userID;
-     /*       var tempTests = $window.localStorage.tests === undefined ? [] : JSON.parse($window.localStorage.tests);
-            tempTests.push(test);
-            $window.localStorage.tests = JSON.stringify(tempTests); */
+            /*       var tempTests = $window.localStorage.tests === undefined ? [] : JSON.parse($window.localStorage.tests);
+                   tempTests.push(test);
+                   $window.localStorage.tests = JSON.stringify(tempTests); */
             TestResultsRest.save(test, token);
+
+        };
+
+        service.getTests = function() {
+            return $http({
+           url: "https://backend-1-sederic.c9users.io/api/TestResults?",
+           method: "GET"
+        })};
+
+        service.setAnswers = function(answers) {
+            answerCategories = answers;
         };
     }]);

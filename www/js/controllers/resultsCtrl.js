@@ -1,13 +1,17 @@
 angular.module('starter.controllers') // Misssing an array
-    .controller('ResultsCtrl', ['$scope', 'TKAnswersService', '$ionicHistory', '$state',
-        function($scope, TKAnswersService, $ionicHistory, $state) {
+    .controller('ResultsCtrl', ['$scope', 'TKAnswersService', 'TKResultsButtonService', '$ionicHistory', '$state',
+        function($scope, TKAnswersService, TKResultsButtonService, $ionicHistory, $state) {
             $scope.menuButtonTapped = function() {
                 $ionicHistory.nextViewOptions({
                     historyRoot: true,
                     disableBack: true
                 });
                 $state.go('lobby');
+
+
             };
+
+            $scope.shouldShowButton = TKResultsButtonService.getShouldShowMenuButton();
 
             $scope.menuButtonTapped = function() {
                 $ionicHistory.nextViewOptions({

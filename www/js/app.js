@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'chart.js', 'TKTestQuestions', 'starter.controllers', 'TKTestAnswers', 'RESTServices'])
+angular.module('starter', ['ionic', 'chart.js', 'TKTestQuestions', 'starter.controllers', 'TKTestAnswers', 'RESTServices', 'TKResultsButton'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -65,5 +65,23 @@ angular.module('starter', ['ionic', 'chart.js', 'TKTestQuestions', 'starter.cont
       url: '/login',
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl'
-    });
+    })
+    
+     .state('history', {
+       url: '/history',
+       templateUrl: 'templates/history.html',
+       controller: 'HistoryCtrl',
+       resolve: {
+         tests: ['TKAnswersService', '$window', function(TKAnswersService, $window) {
+           return TKAnswersService.getTests($window.localStorage.userID, $window.localStorage.token)// I added the token here
+          .then(function(response){
+            //if ()
+            console.log(response);
+            return response.data;
+          })
+         }]
+         
+       }
+     });
+    
 });

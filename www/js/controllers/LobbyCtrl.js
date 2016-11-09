@@ -7,6 +7,12 @@ TKTestQuestionService.all();
         TKAnswersService.resetAnswers();
            $state.go('question',{questionID:1});
    };
+   
+   $scope.goToHistory = function(){
+           $state.go('history');
+       };
+   
+   
    $scope.goToLanding = function()
    {
       $state.go('landing'); 
